@@ -22,6 +22,6 @@ script:
 #branches:
 #  except:
 #  - devlop
-#notifications:
+ #notifications:
 #  slack: okta-4xs8596:rHzaR8VWVpBBGkEcUI3YOwE7
 
