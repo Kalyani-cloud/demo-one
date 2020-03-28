@@ -20,3 +20,8 @@ after_success:
   - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
   - docker tag test $DOCKER_USER/test-repo:latest
   - docker push $DOCKER_USER/test-repo:latest
+  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+  - ./jfrog rt u https://dharma.jfrog.io/artifactory/Travis-ci-maven/ Travis-ci-maven --build-name= DNagineni/hello --build-number=49
+  - ./jfrog rt bce DNagineni/hello 49
+  - ./jfrog rt bp DNagineni/hello 49
+  
