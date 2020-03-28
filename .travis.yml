@@ -12,6 +12,8 @@ jdk:
 
 jobs:
   include:
+    - state: mvn clean
     - stage: mvn compaile
     - stage: mvn test
     - stage: mvn package
+    - stage: mvn install
