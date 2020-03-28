@@ -2,6 +2,8 @@ language: java
 jdk:
   - openjdk8
 script: mvn clean package
+services:
+  - docker
 #branches:
 #  only:
 #  - master
@@ -9,6 +11,6 @@ script: mvn clean package
 #branches:
 #  except:
 #  - devlop
-notifications:
-  slack: okta-4xs8596:rHzaR8VWVpBBGkEcUI3YOwE7
+#notifications:
+#  slack: okta-4xs8596:rHzaR8VWVpBBGkEcUI3YOwE7
 
