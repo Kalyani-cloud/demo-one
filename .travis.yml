@@ -9,8 +9,6 @@ before_script:
   - sudo apt-get install wget
   # Install JFrog CLI
   - curl -fL https://getcli.jfrog.io | sh
-  # Configure Artifactory instance with JFrog CLI
-  - ./jfrog rt config --url https://dharma.jfrog.io/ --user travis-jfrog --apikey Travisci@123 --interactive true
   - sudo apt-get install docker
 script:
   - mvn clean install
