@@ -9,6 +9,8 @@ services:
 before_script:
   - sudo apt-get install wget
   - sudo apt-get install docker
+script:
+  - docker build -t test .
 #branches:
 #  only:
 #  - master
