@@ -7,6 +7,10 @@ services:
   - docker
 before_script:
   - sudo apt-get install wget
+  # Install JFrog CLI
+  - curl -fL https://getcli.jfrog.io | sh
+  # Configure Artifactory instance with JFrog CLI
+  - ./jfrog rt config --url https://dharma.jfrog.io/ --user travis-jfrog --apikey Travis@123 --interactive false
   - sudo apt-get install docker
 script:
   - mvn clean install
