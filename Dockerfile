@@ -1,5 +1,4 @@
-FROM ubuntu
-MAINTAINER dDharma
-RUN apt-get update -y
-EXPOSE 3000
-ENTRYPOINT ["ping", "www.google.com"]
+FROM openjdk:8
+MAINTAINER Dharmendra
+COPY /home/travis/build/DNagineni/hello/target/helloworld-1.1.jar helloworld-1.1.jar
+ENTRYPOINT ["java","-jar","/helloworld-1.1.jar"]
