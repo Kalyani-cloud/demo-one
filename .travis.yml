@@ -13,6 +13,12 @@ before_script:
 script:
   - mvn clean install
   - docker build -t test .
+after_success:
+  - docker login -u 8008598725 -p Dnsu@123
+  - docker tag test dharma/test:36
+  - docker push dharma/test:36
+  - docker tag test dharma/test:latest
+  - docker push dharma/test:latest
 #branches:
 #  only:
 #  - master
