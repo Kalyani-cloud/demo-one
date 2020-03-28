@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjkd8
 script:
   - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
   - chmod +x jfrog
