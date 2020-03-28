@@ -1,5 +1,11 @@
 language: java
 jdk:
-  - openjdk8
-#script: mvn package
-script: mvn clean package
+  - oraclejdk8
+script:
+  - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
+  - chmod +x jfrog
+  - mvn clean install
+  - ./jfrog rt config --url https://dharma.jfrog.io/ --user travis-jfrog --apikey $Travisci@123
+  - ./jfrog rt u "/home/travis/build/DNagineni/hello/target/helloworld-1.1.jar" Travis-ci-maven --build-name=Travis-ci-maveny --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+  - ./jfrog rt bce Travis-ci-maven $TRAVIS_BUILD_NUMBER
+  - ./jfrog rt bp Travis-ci-maven $TRAVIS_BUILD_NUMBER
