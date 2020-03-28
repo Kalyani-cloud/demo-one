@@ -15,10 +15,10 @@ script:
   - docker build -t test .
 after_success:
   - docker login -u 8008598725 -p Dnsu@123
-  - docker tag test dharma/test:36
-  - docker push dharma/test:36
-  - docker tag test dharma/test:latest
-  - docker push dharma/test:latest
+  - docker tag test 8008598725/test-repo:36
+  - docker push 8008598725/test-repo:36
+  - docker tag test 8008598725/test-repo:latest
+  - docker push 8008598725/test-repo:latest
 #branches:
 #  only:
 #  - master
