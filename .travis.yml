@@ -14,6 +14,7 @@ script:
   - mvn clean install
   - docker build -t test .
 after_success:
+  - docker images
   - docker login -u 8008598725 -p Dnsu@123
   - docker tag test 8008598725/test-repo:36
   - docker push 8008598725/test-repo:36
