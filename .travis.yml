@@ -6,8 +6,8 @@ sudo: required
 services:
   - docker
 before_script:
-  - yum install wget
-  - yum install docker
+  - sudo yum install wget
+  - sudo yum install docker
 #branches:
 #  only:
 #  - master
