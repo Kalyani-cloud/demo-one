@@ -16,8 +16,8 @@ script:
 after_success:
   - docker images
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker tag test $DOCKER_USER/test-repo:TRAVIS_BUILD_ID
-  - docker push $DOCKER_USER/test-repo:TRAVIS_BUILD_ID
+  - docker tag test $DOCKER_USER/test-repo:$TRAVIS_BUILD_ID
+  - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_ID
   - docker tag test $DOCKER_USER/test-repo:latest
   - docker push $DOCKER_USER/test-repo:latest
 #branches:
