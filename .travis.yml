@@ -15,11 +15,11 @@ script:
   - docker build -t test .
 after_success:
   - docker images
-  - docker login -u 8008598725 -p Dnsu@123
-  - docker tag test 8008598725/test-repo:36
-  - docker push 8008598725/test-repo:36
-  - docker tag test 8008598725/test-repo:latest
-  - docker push 8008598725/test-repo:latest
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag test $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
+  - docker tag test $DOCKER_USER/test-repo:latest
+  - docker push $DOCKER_USER/test-repo:latest
 #branches:
 #  only:
 #  - master
