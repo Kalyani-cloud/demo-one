@@ -4,6 +4,8 @@ jdk:
 script: mvn clean package
 services:
   - docker
+before_script:
+  - npm install
 #branches:
 #  only:
 #  - master
