@@ -12,6 +12,6 @@ jdk:
 
 jobs:
   include:
-    - state: mvn compaile
-      script: echo 5
-
+    - stage: mvn compaile
+    - stage: mvn test
+    - stage: mvn package
