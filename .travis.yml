@@ -23,8 +23,3 @@ after_success:
 #branches:
 #  only:
 #  - master
-  
-#branches:
-#  except:
-#  - devlop
-
