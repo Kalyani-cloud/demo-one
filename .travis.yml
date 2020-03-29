@@ -8,20 +8,25 @@ services:
 before_script:
   - sudo apt-get install wget
   # Install JFrog CLI
-  - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
-  - chmod +x jfrog
+  #- wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
+  #- chmod +x jfrog
   - sudo apt-get install docker
+  - pip install awscli
+  - export PATH=$PATH:/$HOME/.local/bin
 script:
   - mvn clean install
   - docker build -t test .
 after_success:
   - docker images
-  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker tag test $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
-  - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
-  - docker tag test $DOCKER_USER/test-repo:latest
-  - docker push $DOCKER_USER/test-repo:latest
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD
-  - ./jfrog rt u "/home/travis/.m2/repository/com/coveros/demo/helloworld/1.1/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
-  - ./jfrog rt bce hello $TRAVIS_BUILD_NUMBER
-  - ./jfrog rt bp hello $TRAVIS_BUILD_NUMBER
+  #- docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  #- docker tag test $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
+  #- docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
+  #- docker tag test $DOCKER_USER/test-repo:latest
+  #- docker push $DOCKER_USER/test-repo:latest
+  #- ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD
+  #- ./jfrog rt u "/home/travis/.m2/repository/com/coveros/demo/helloworld/1.1/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+  #- ./jfrog rt bce hello $TRAVIS_BUILD_NUMBER
+  #- ./jfrog rt bp hello $TRAVIS_BUILD_NUMBER
+  - eval $(aws ecr get-login --region ca-central-1 --no-include-email)
+  - docker tag $REPO:$TRAVIS_BUILD_NUMBER $AWS_ACCOUNT_NUMBER.dkr.ecr.ca-central-1.amazonaws.com/$REPO:$TRAVIS_BUILD_NUMBER
+  - docker push $AWS_ACCOUNT_NUMBER.dkr.ecr.ca-central-1.amazonaws.com/$REPO:$TRAVIS_BUILD_NUMBER
