@@ -8,7 +8,8 @@ services:
 before_script:
   - sudo apt-get install wget
   # Install JFrog CLI
-  - curl -fL https://getcli.jfrog.io | sh
+  - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
+  - chmod +x jfrog
   - sudo apt-get install docker
 script:
   - mvn clean install
@@ -20,8 +21,9 @@ after_success:
   - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
   - docker tag test $DOCKER_USER/test-repo:latest
   - docker push $DOCKER_USER/test-repo:latest
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
-  - ./jfrog rt u https://dharma.jfrog.io/artifactory/Travis-ci-maven/ Travis-ci-maven --build-name= DNagineni/hello --build-number=49
-  - ./jfrog rt bce DNagineni/hello 49
-  - ./jfrog rt bp DNagineni/hello 49
+  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_PASSWORD
+  - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+  - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+  - ./jfrog rt bce hello $TRAVIS_BUILD_NUMBER
+  - ./jfrog rt bp hello $TRAVIS_BUILD_NUMBER
   
