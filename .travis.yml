@@ -21,7 +21,7 @@ after_success:
   - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
   - docker tag test $DOCKER_USER/test-repo:latest
   - docker push $DOCKER_USER/test-repo:latest
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD
+  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD --yes
   - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
   - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
   - ./jfrog rt bce hello $TRAVIS_BUILD_NUMBER
