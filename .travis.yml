@@ -15,7 +15,8 @@ before_script:
   - export PATH=$PATH:/$HOME/.local/bin
 script:
   - mvn clean install
-  - docker build -t test .
+  #- docker build -t test .
+  - docker build -t devops-repo .
 after_success:
   - docker images
   #- docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
