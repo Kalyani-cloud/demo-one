@@ -5,25 +5,12 @@ jdk:
 sudo: required
 services:
   - docker
-before_script:
-  - sudo apt-get install wget
-  # Install JFrog CLI
+script:
   - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
   - chmod +x jfrog
-  - sudo apt-get install docker
-script:
   - mvn clean install
-  - docker build -t test .
-after_success:
-  - docker images
-  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker tag test $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
-  - docker push $DOCKER_USER/test-repo:$TRAVIS_BUILD_NUMBER
-  - docker tag test $DOCKER_USER/test-repo:latest
-  - docker push $DOCKER_USER/test-repo:latest
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD --yes
-  - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
-  - ./jfrog rt u "/target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
+  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD
+  - ./jfrog rt u "target/*.jar" Travis-ci-maven --build-name=hello --build-number=$TRAVIS_BUILD_NUMBER --flat=false
   - ./jfrog rt bce hello $TRAVIS_BUILD_NUMBER
   - ./jfrog rt bp hello $TRAVIS_BUILD_NUMBER
   
