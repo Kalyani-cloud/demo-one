@@ -5,7 +5,11 @@ jdk:
 #sudo: required
 #services:
 #  - docker
-#before_script:
+before_script:
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
 #  - sudo apt-get install wget
   # Install JFrog CLI
 #  - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
