@@ -1,12 +1,12 @@
 language: java
 os: linux
+dist: trusty
 jdk:
   - openjdk8
 cache:
   directories:
   - .autoconf
   - $HOME/.m2
-sudo: required
 services:
   - docker
 before_script:
