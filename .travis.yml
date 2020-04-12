@@ -2,14 +2,14 @@ language: java
 os: linux
 jdk:
   - openjdk8
-sudo: required
-services:
-  - docker
-before_script:
 cache:
   directories:
   - .autoconf
   - $HOME/.m2
+sudo: required
+services:
+  - docker
+before_script:
 #  - sudo apt-get install wget
   # Install JFrog CLI
   - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
@@ -17,6 +17,13 @@ cache:
   - sudo apt-get install docker
   - pip install awscli
   - export PATH=$PATH:/$HOME/.local/bin
+  - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - mkdir -p $HOME/bin
+  - cp ./kubectl $HOME/bin/kubectl
+  - export PATH=$PATH:$HOME/bin
+  - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+  - kubectl version --short --client
 script:
   - mvn clean install
   - docker build -t test .
