@@ -2,9 +2,9 @@ language: java
 os: linux
 jdk:
   - openjdk8
-#sudo: required
-#services:
-#  - docker
+sudo: required
+services:
+  - docker
 before_script:
 cache:
   directories:
