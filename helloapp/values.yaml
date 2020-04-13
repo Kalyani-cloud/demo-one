@@ -1,0 +1,13 @@
+image:
+  tag: latest
+  repository: 8008598725/test-repo
+  imagePullPolicy: Always
+
+labels:
+  env: "staging"
+  cluster: "eks-test-cluster"
+
+service:
+  port: 80
+  targetPort: 8080
+  type: LoadBalancer
