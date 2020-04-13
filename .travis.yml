@@ -1,3 +1,4 @@
+sudo: required
 language: java
 os: linux
 dist: trusty
@@ -10,7 +11,7 @@ cache:
 services:
   - docker
 before_script:
-  - apt-get install docker
+  - sudo apt-get install docker
   - pip install awscli
   - export PATH=$PATH:/$HOME/.local/bin
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
