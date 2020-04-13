@@ -45,7 +45,8 @@ before_script:
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws eks --region us-east-1 update-kubeconfig --name eks-test-cluster
   - helm lint helloapp
-  - helm install helloapp . -n kube-system
+  #- helm install helloapp . -n kube-system
+  - helm upgrade --install helloapp . -n kube-system
 #  - kubectl create -f deployment.yaml
 #  - kubectl create -f service.yaml
   - kubectl get nodes
