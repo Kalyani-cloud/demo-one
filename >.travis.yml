@@ -40,7 +40,11 @@ before_script:
   - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws eks --region us-east-1 update-kubeconfig --name eks-test-cluster
+  - kubectl create -f deployment.yaml
+  - kubectl create -f service.yaml
   - kubectl get nodes
+  - kubectl get pods
+  - kubectl get svc
 script:
   - mvn clean install
   - docker build -t test .
