@@ -4,4 +4,3 @@ dist: trusty
 jdk:
   - openjdk8
 script: clear package
-
